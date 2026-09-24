@@ -110,7 +110,7 @@ def salin_file_berdasarkan_config(file_config="config.conf"):
 
     if not folder_asal.exists():
         print(
-            f"--> Error: Folder asal tidak ditemukan atau jaringan terputus:\n{folder_asal}"
+            f"--> Error: Folder asal tidak ditemukan atau jaringan terputus:{folder_asal}"
         )
         return
 
@@ -122,7 +122,7 @@ def salin_file_berdasarkan_config(file_config="config.conf"):
     print(
         f"--> Rentang Target   : {target_mulai.strftime('%d-%m-%Y')} s/d {target_selesai.strftime('%d-%m-%Y')}"
     )
-    print(f"--> Folder Asal      : {folder_asal}\n")
+    print(f"--> Folder Asal      : {folder_asal}")
 
     daftar_file = list(folder_asal.glob("*.xlsx")) + list(
         folder_asal.glob("*.xls")

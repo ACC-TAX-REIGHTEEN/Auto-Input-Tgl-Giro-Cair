@@ -105,7 +105,7 @@ def main():
 
     print(f"--> [CONFIG] URL Spreadsheet: {ss_url}")
     print(f"--> [CONFIG] Folder Sumber  : {current_dir} (Lokal)")
-    print(f"--> [CONFIG] Toleransi H-  : {gen_before} hari | H+ : {gen_after} hari\n")
+    print(f"--> [CONFIG] Toleransi H-  : {gen_before} hari | H+ : {gen_after} hari")
 
     cred_file = os.path.join(current_dir, 'credentials.json')
     if not os.path.exists(cred_file):
@@ -115,7 +115,7 @@ def main():
     try:
         gc = gspread.service_account(filename=cred_file)
         sh = gc.open_by_url(ss_url)
-        print("--> [SUCCESS] Berhasil terhubung ke Google Sheets!\n")
+        print("--> [SUCCESS] Berhasil terhubung ke Google Sheets!")
     except Exception as e:
         print(f"--> [ERROR] Gagal membuka Google Sheets: {e}")
         return
@@ -145,17 +145,17 @@ def main():
         try:
             worksheet = sh.worksheet(sheet_name)
         except Exception as e:
-            print(f"--> [!] Worksheet '{sheet_name}' tidak ditemukan di Google Sheets. Lewati.\n")
+            print(f"--> [!] Worksheet '{sheet_name}' tidak ditemukan di Google Sheets. Lewati.")
             continue
 
         records = worksheet.get_all_records()
         if not records:
-            print(f"--> [i] Sheet '{sheet_name}' kosong.\n")
+            print(f"--> [i] Sheet '{sheet_name}' kosong.")
             continue
 
         headers = worksheet.row_values(1)
         if write_col not in headers:
-            print(f"--> [!] Kolom target '{write_col}' tidak ditemukan di sheet header. Lewati.\n")
+            print(f"--> [!] Kolom target '{write_col}' tidak ditemukan di sheet header. Lewati.")
             continue
 
         write_col_idx = headers.index(write_col) + 1
@@ -164,7 +164,7 @@ def main():
         mutasi_files = glob.glob(pattern)
 
         if not mutasi_files:
-            print(f"--> [!] Tidak ditemukan file mutasi lokal dengan pola: *{loc_file_key}*.xlsx\n")
+            print(f"--> [!] Tidak ditemukan file mutasi lokal dengan pola: *{loc_file_key}*.xlsx")
             continue
 
         print(f"--> [+] Ditemukan {len(mutasi_files)} file mutasi lokal terkait.")
@@ -176,7 +176,7 @@ def main():
                 list_mutasi_df.append(df_temp)
 
         if not list_mutasi_df:
-            print("--> [!] Tidak ada data mutasi yang valid untuk diproses.\n")
+            print("--> [!] Tidak ada data mutasi yang valid untuk diproses.")
             continue
 
         df_mutasi_all = pd.concat(list_mutasi_df, ignore_index=True)
@@ -224,7 +224,7 @@ def main():
                 print(f"--> [MATCH ROW {row_num}] Nominal: Rp {target_nominal:,.0f} | JT: {dt_jatuh_tempo.strftime('%d/%m/%Y')} -> ACTUAL CAIR: {matched_date_str}")
                 updated_count += 1
 
-        print(f"--> [RESULT] Selesai untuk Sheet '{sheet_name}'. Total diperbarui: {updated_count} baris.\n")
+        print(f"--> [RESULT] Selesai untuk Sheet '{sheet_name}'. Total diperbarui: {updated_count} baris.")
 
     print("--> PROSES SELESAI SELURUHNYA!")
 
